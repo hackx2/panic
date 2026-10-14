@@ -1,0 +1,4 @@
+-cp test
+--main Main
+--interp
+-L panic

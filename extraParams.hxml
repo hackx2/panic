@@ -1,0 +1,1 @@
+--macro haxe.macro.Compiler.addGlobalMetadata("", "@:build(panic.Fixer.build())", true, true, false)

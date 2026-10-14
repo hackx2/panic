@@ -1,0 +1,11 @@
+{
+	"name": "panic",
+	"classPath": "src",
+	"contributors": ["hackx2"],
+	"description": "rust-like panics in haxe",
+	"license": "MIT",
+	"releasenote": "initial release",
+	"version": "1.0.0",
+	"url": "https://github.com/hackx2/panic",
+	"tags": ["rust", "panic"]
+}
