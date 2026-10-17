@@ -5,8 +5,8 @@ import haxe.macro.Context;
 import haxe.macro.Expr.ExprOf;
 import haxe.macro.PositionTools;
 
-@:no_panic // just in case ^^
-class Funcs {
+@:panic.skip // just in case ^^
+final class Funcs {
 	#if macro
 	static function panic_(txt:String, message:ExprOf<String>, ?panic:Bool) {
 		final msg = switch message.expr {

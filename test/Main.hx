@@ -4,6 +4,6 @@ function todo(e):Void {
 
 function main() {
 	todo("testing 123");
-	@:bypass todo("testing 123");
+	@:panic.bypass todo("testing 123");
 	//panic.Funcs.todo("2");
 }

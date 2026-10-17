@@ -5,9 +5,11 @@ import haxe.macro.Context;
 import haxe.macro.Compiler;
 import haxe.macro.ExprTools;
 
-@:no_panic
+@:panic.skip
 final class Fixer {
-	static final no_meta:String = ':no_panic';
+	inline static final skip_meta:String = ':panic.skip';
+	inline static final bypass_meta:String = ':panic.bypass';
+
 	static final functions = ['panic', 'unreachable', 'unimplemented', 'todo']; // panic methods ^^
 
 	public static function build() {
@@ -18,10 +20,10 @@ final class Fixer {
 		switch t {
 			case TInst(c, _): // classes
 				final ct = c.get();
-				if (ct.isExtern || ct.meta.has(no_meta)) return null;
+				if (ct.isExtern || ct.meta.has(skip_meta)) return null;
 			case TAbstract(a, _):
 				final at = a.get();
-				if (at.meta.has(no_meta)) return null;
+				if (at.meta.has(skip_meta)) return null;
 			case _: return null;
 		}
 
@@ -41,7 +43,7 @@ final class Fixer {
 
 	// converts `todo("hi")` to `panic.Funcs.todo("hi")`
 	static function rewrite_expr(e:Expr, field_names:Array<String>):Expr switch e.expr {
-		case EMeta({name: ":bypass"}, inner_expr): return rewrite_expr(inner_expr, []);
+		case EMeta({name: bypass_meta}, inner_expr): return rewrite_expr(inner_expr, []);
 		case ECall({expr: EConst(CIdent(name))}, args) if(functions.contains(name) && !field_names.contains(name)):
 			final callee = macro panic.Funcs.$name;
 			return {
