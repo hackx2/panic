@@ -20,7 +20,7 @@ final class Funcs {
 		final arr:Array<Dynamic> = [loc.file,loc.range.start.line, loc.range.start.character];
 		final where = 'panicked at ' + arr.join(':');
 
-		final out = new StringBuf();
+		final out = new StringBuf(); // get rid
 		out.add(where); out.add(':\n');
 		if(panic) {
 			out.add(msg != null ? msg : txt);
