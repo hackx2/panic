@@ -30,6 +30,7 @@ final class Funcs {
 		
 		return if (Context.defined('sys') && !Context.defined('panic.throw')) macro {
 			Sys.stderr().writeString($v{out.toString()});
+			Sys.stderr().flush();
 			Sys.exit(101); // same status rust exits with
 			throw $v{txt}; // stops the compiler from complaining about requiring a return type
 		} else {
